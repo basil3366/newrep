@@ -4,7 +4,7 @@ on:
   workflow_dispatch: # TODO: remove
   push:
     branches:
-      - pipelines  # Change this to your source branch.
+      - master  # Change this to your source branch.
 
 jobs:
   mirror:
