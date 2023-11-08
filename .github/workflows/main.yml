@@ -18,9 +18,10 @@ jobs:
 
       - name: Mirror to Target Repository
         run: |
-          eval "$(ssh-agent -s)"
-          ssh-add <(echo "$SSH_PRIVATE_KEY")
-          git push --mirror "git@github.com:basil3366/newrep-security.git"
+          echo "$SSH_PRIVATE_KEY" > ssh_key.pem
+          chmod 600 ssh_key.pem
+          GIT_SSH_COMMAND="ssh -i ssh_key.pem" git push --mirror "git@github.com:basil3366/newrep-security.git"
         env:
-          GH_PAT: ${{ secrets.GH_PAT }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+
 
