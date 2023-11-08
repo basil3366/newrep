@@ -3,7 +3,7 @@ name: Mirror Repository
 on:
   push:
     branches:
-      - main  # Change this to your source branch
+      - master  # Change this to your source branch
 
 jobs:
   mirror:
