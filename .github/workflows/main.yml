@@ -14,16 +14,11 @@ jobs:
       - name: Check out the code
         uses: actions/checkout@v2
 
-      - name: Mirror to Target Repository
+      - name: Mirror to Security Repository
         run: |
-          git remote set-url origin https://github.com/basil3366/newrep-security.git
-          git push --mirror
-        env:
-          GH_PAT: ${{ secrets.GH_PAT }}
-          echo: $GH_PAT
-      - name: Mirror to GitHub Repository
-        run: |
-          git remote add target https://github.com/basil3366/newrep-security.git
-          git push --mirror target
+          TARGET_REPO_NAME="${{ github.repository_owner }}/corvina-k8s-security"
+          git clone --bare https://github.com/${{ github.repository }}.git
+          cd "$(basename "${{ github.repository }}")"
+          git push --mirror "https://github.com/${TARGET_REPO_NAME}.git"
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
