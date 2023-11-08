@@ -14,10 +14,11 @@ jobs:
       - name: Check out the code
         uses: actions/checkout@v2
 
-      - name: Mirror to Security Repository
+      - name: Mirror to Target Repository
         run: |
-          TARGET_REPO_NAME="${{ github.repository_owner }}/corvina-k8s-security"
-          git clone --bare https://github.com/${{ github.repository }}.git
-          git push --mirror "https://github.com/${TARGET_REPO_NAME}.git"
+          eval "$(ssh-agent -s)"
+          ssh-add <(echo "$SSH_PRIVATE_KEY")
+          git push --mirror "git@github.com:basil3366/newrep-security.git"
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
+
