@@ -18,7 +18,6 @@ jobs:
         run: |
           TARGET_REPO_NAME="${{ github.repository_owner }}/corvina-k8s-security"
           git clone --bare https://github.com/${{ github.repository }}.git
-          cd "$(basename "${{ github.repository }}")"
           git push --mirror "https://github.com/${TARGET_REPO_NAME}.git"
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
