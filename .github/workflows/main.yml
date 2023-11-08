@@ -1,27 +1,22 @@
 name: Mirror Repository
 
 on:
-  workflow_dispatch: # TODO: remove
   push:
     branches:
-      - master  # Change this to your source branch.
+      - master  # Change this to your source branch
 
 jobs:
   mirror:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out the code
+      - name: Checkout code
         uses: actions/checkout@v2
-        with:
-          ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Mirror to Target Repository
         run: |
-          echo "$SSH_PRIVATE_KEY" > ssh_key.pem
-          chmod 600 ssh_key.pem
-          GIT_SSH_COMMAND="ssh -i ssh_key.pem" git push --mirror "git@github.com:basil3366/newrep-security.git"
+          git clone --bare https://github.com/basil3366/newrep.git
+          cd "$(basename newrep.git)"
+          git push --mirror https://basil3366:${{ secrets.GH_PAT }}@github.com/basil3366/newrep-security.git
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-
-
+          GH_PAT: ${{ secrets.GH_PAT }}
