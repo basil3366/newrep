@@ -23,7 +23,7 @@ jobs:
       - name: Check out the code from source repository
         uses: actions/checkout@v2
         with:
-          repository: mirror-test4.git  # Use the repository URL of corvina-k8s-security
+          repository: basil3366/mirror-test4.git  # Use the repository URL of corvina-k8s-security
           ref: master
       - name: Apply Git Filter Repo
         run: |
