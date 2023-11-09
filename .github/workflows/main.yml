@@ -22,6 +22,5 @@ jobs:
           GH_PAT: ${{ secrets.GH_PAT }}
       - name: Apply Git Filter Repo
         run: |
-        working-directory: /home/runner/work/mirror-test4/mirror-test4/./mirror-test4.git
           git-filter-repo --force --name-callback 'return b"CSO" ' --email-callback 'return b"ciso@basil.io"'
-
+        working-directory: /home/runner/work/mirror-test4/mirror-test4/./mirror-test4.git
