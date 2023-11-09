@@ -13,35 +13,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Mirror to Target Repository
-        run: |
-          git clone --bare https://github.com/basil3366/newrep.git
-          cd "$(basename newrep.git)"
-          git push --mirror https://basil3366:${{ secrets.GH_PAT }}@github.com/basil3366/mirror-test4.git
-        env:
-          GH_PAT: ${{ secrets.GH_PAT }}
-      - name: Check out the code from source repository
-        uses: actions/checkout@v2
-        with:
-          repository: basil3366/mirror-test4.git  # Use the repository URL of corvina-k8s-security
-          ref: master
-          token: ${{ secrets.GH_PAT }}
-      - name: Install git-filter-repos
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y git-filter-repo
       - name: Apply Git Filter Repo
         run: |
-          git-filter-repo --force --name-callback 'return b"CSO" ' --email-callback 'return b"ciso@basil.io"'
-        working-directory: .
-      - name: Push changes to the remote repository
+          git-filter-repo --force --name-callback 'return b"CISO" ' --email-callback 'return b"ciso@basil.io"'
+        working-directory: ./newrep
+
+      - name: Mirror to Target Repository
         run: |
-          git remote add origin https://github.com/basil3366/mirror-test4
-          git config --global user.email "basil3366@gmail.com"
-          git config --global user.name "basil3366"
-          git pull origin master --rebase
-          git push origin master
+          git clone --bare https://basil3366:${{ secrets.GH_PAT }}@github.com/basil3366/newrep
+          cd "$(basename newrep.git)"
+          git push --mirror https://basil3366:${{ secrets.GH_PAT }}@github.com/newrep/mirror-test4.git
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
-
-        
