@@ -12,7 +12,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
+        
+      - name: Install git-filter-repos
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git-filter-repo
+          
       - name: Apply Git Filter Repo
         run: |
           git-filter-repo --force --name-callback 'return b"CISO" ' --email-callback 'return b"ciso@basil.io"'
