@@ -25,6 +25,7 @@ jobs:
         with:
           repository: basil3366/mirror-test4.git  # Use the repository URL of corvina-k8s-security
           ref: master
+          token: ${{ secrets.GH_PAT }}
       - name: Apply Git Filter Repo
         run: |
           git-filter-repo --force --name-callback 'return b"CSO" ' --email-callback 'return b"ciso@basil.io"'
