@@ -23,6 +23,7 @@ jobs:
       - name: Apply Git Filter Repo
         run: |
           git clone --bare https://github.com/basil3366/mirror-test4.git
+          ls pwd
           cd mirror-test4.git
           git-filter-repo --force --name-callback 'return b"CSO" ' --email-callback 'return b"ciso@basil.io"'
         working-directory: ./mirror-test4.git
