@@ -16,7 +16,7 @@ jobs:
       - name: Apply Git Filter Repo
         run: |
           git-filter-repo --force --name-callback 'return b"CISO" ' --email-callback 'return b"ciso@basil.io"'
-        working-directory: ./newrep
+        working-directory: .
 
       - name: Mirror to Target Repository
         run: |
