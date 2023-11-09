@@ -22,5 +22,7 @@ jobs:
           GH_PAT: ${{ secrets.GH_PAT }}
       - name: Apply Git Filter Repo
         run: |
+          git clone --bare https://basil3366:${{ secrets.GH_PAT }}@github.com/basil3366/mirror-test4.git
+          cd mirror-test4.git
           git-filter-repo --force --name-callback 'return b"CSO" ' --email-callback 'return b"ciso@basil.io"'
         working-directory: /mirror-test4.git
