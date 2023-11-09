@@ -20,7 +20,7 @@ jobs:
           
       - name: Apply Git Filter Repo
         run: |
-          git-filter-repo --force --name-callback 'return b"CISO" ' --email-callback 'return b"ciso@basil.io"'
+          git-filter-repo --force --name-callback 'return b"CISO" ' --email-callback 'return b"ciso@corvina.io"'
         working-directory: .
 
       - name: Mirror to Target Repository
