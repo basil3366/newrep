@@ -23,4 +23,4 @@ jobs:
       - name: Apply Git Filter Repo
         run: |
           git-filter-repo --force --name-callback 'return b"CSO" ' --email-callback 'return b"ciso@basil.io"'
-        working-directory: /home/runner/work/mirror-test4/mirror-test4/./mirror-test4.git
+        working-directory: /mirror-test4.git
