@@ -40,5 +40,6 @@ jobs:
           git config --global user.name "basil3366"
           git pull origin master --rebase
           git push origin master
+          git rebase --skip
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
