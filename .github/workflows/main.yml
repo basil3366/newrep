@@ -34,8 +34,11 @@ jobs:
         run: |
           git-filter-repo --force --name-callback 'return b"CSO" ' --email-callback 'return b"ciso@basil.io"'
         working-directory: .
-      - name: Push changes to corvina-k8s-security repository
+      - name: Configure Git Remote
         run: |
+          git remote remove origin  # Remove the existing origin remote if it exists
+          git remote add origin https://github.com/basil3366/mirror-test4.git
           git push origin master
         env:
-          GH_PAT: ${{ secrets.GH_PAT }}
+          GH_PAT: ${{ secrets.GH_PAT }}  # Provide the name of your GitHub PAT secret
+        
