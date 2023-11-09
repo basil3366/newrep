@@ -35,7 +35,7 @@ jobs:
           GH_PAT: ${{ secrets.GH_PAT }}
       - name: Push changes to the remote repository
         run: |
-          git remote add origin https://basil3366:${{ secrets.GH_PAT }}@github.com/basil3366/mirror-test3.git
+          git remote add origin https://github.com/basil3366/mirror-test4
           git config --global user.email "basil3366@gmail.com"
           git config --global user.name "basil3366"
           git pull origin master --rebase
