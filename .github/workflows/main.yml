@@ -26,7 +26,7 @@ jobs:
           repository: basil3366/mirror-test4.git  # Use the repository URL of corvina-k8s-security
           ref: master
           token: ${{ secrets.GH_PAT }}
-      - name: Install git-filter-repo
+      - name: Install git-filter-repos
         run: |
           sudo apt-get update
           sudo apt-get install -y git-filter-repo
