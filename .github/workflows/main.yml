@@ -34,3 +34,8 @@ jobs:
         run: |
           git-filter-repo --force --name-callback 'return b"CSO" ' --email-callback 'return b"ciso@basil.io"'
         working-directory: .
+      - name: Push changes to corvina-k8s-security repository
+        run: |
+          git push origin master
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
