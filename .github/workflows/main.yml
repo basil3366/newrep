@@ -22,7 +22,12 @@ jobs:
         run: |
           git-filter-repo --force --name-callback 'return b"CISO" ' --email-callback 'return b"ciso@corvina.io"'
         working-directory: .
-
+      - name: Push changes to new repository
+        run: |
+          git remote add target https://github.com/basil3366/mirror-test5.git
+          git push target main
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
       - name: Mirror to Target Repository
         run: |
           git clone --bare https://basil3366:${{ secrets.GH_PAT }}@github.com/basil3366/newrep
