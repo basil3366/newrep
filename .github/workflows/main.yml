@@ -21,22 +21,19 @@ jobs:
 
       - name: Create and copy "security" branch
         run: |
+          # Clone the repository
           git clone https://basil3366:${{ secrets.GH_PAT }}@github.com/basil3366/newrep
           cd newrep
           git config --global user.email "basil3366@gmail.com"
           git config --global user.name "basil3366"
-          git checkout -b security
-          git checkout master -- .
-          if [ -n "$(git status --porcelain)" ]; then
-            git add .
-            git commit -m "Create 'security' branch with contents from 'master' without history"
-          else
-            echo "No changes to commit in the 'security' branch."
-            git branch -a
-          fi
+          # Create and switch to the "security" branch without checking it out
+          git branch security $(git rev-parse --verify develop)
+
+          # Reset the working directory to match the "security" branch
+          git reset --hard security
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
-
+      
       - name: Mirror to Target Repository
         run: |
           git clone --bare https://basil3366:${{ secrets.GH_PAT }}@github.com/basil3366/newrep
