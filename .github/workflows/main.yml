@@ -24,7 +24,7 @@ jobs:
           git clone https://basil3366:${{ secrets.GH_PAT }}@github.com/basil3366/newrep
           cd newrep
           git checkout -b security
-          git checkout develop -- .
+          git checkout master -- .
           git add .
           git commit -m "Create 'security' branch with contents from 'develop' without history"
         env:
