@@ -31,9 +31,17 @@ jobs:
           git add dummy.txt
           git commit -m "Add dummy file to create 'security' branch"
           git branch -a
-          git remote add origin https://basil3366:${{ secrets.GH_PAT }}@github.com/basil3366/newrep.git
-          git push -u origin security
+
+          # Check if "origin" remote already exists
+          if ! git remote | grep -q origin; then
+            # If not, add the "origin" remote
+            git remote add origin https://basil3366:${{ secrets.GH_PAT }}@github.com/basil3366/newrep.git
+          fi
+
+          # Run git-filter-repo to modify commit information
           git-filter-repo --force --name-callback 'return b"CISO"' --email-callback 'return b"ciso@corvina.io"'
+
+          # Push the modified "security" branch
           git push -u origin security
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
