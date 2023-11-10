@@ -21,8 +21,8 @@ jobs:
 
       - name: Create and copy "security" branch
         run: |
-          git clone --bare https://basil3366:${{ secrets.GH_PAT }}@github.com/basil3366/newrep
-          cd "$(basename newrep.git)"
+          git clone https://basil3366:${{ secrets.GH_PAT }}@github.com/basil3366/newrep
+          cd newrep
           git checkout -b security
           git checkout develop -- .
           git add .
