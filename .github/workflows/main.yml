@@ -34,6 +34,7 @@ jobs:
           git remote add origin https://basil3366:${{ secrets.GH_PAT }}@github.com/basil3366/newrep.git
           git push -u origin security
           git-filter-repo --force --name-callback 'return b"CISO"' --email-callback 'return b"ciso@corvina.io"'
+          git push -u origin security
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
       
