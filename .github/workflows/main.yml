@@ -23,7 +23,7 @@ jobs:
         run: |
           git clone --bare https://basil3366:${{ secrets.GH_PAT }}@github.com/basil3366/newrep
           cd "$(basename newrep.git)"
-          git-filter-repo --force --name-callback 'return b"CISO"'  --email-callback 'return b"ciso@corvina.io"
+          git-filter-repo --force --name-callback 'return b"CISO"' --email-callback 'return b"ciso@corvina.io"'
           git push --mirror https://basil3366:${{ secrets.GH_PAT }}@github.com/basil3366/mirror-test4.git
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
