@@ -32,6 +32,7 @@ jobs:
             git commit -m "Create 'security' branch with contents from 'master' without history"
           else
             echo "No changes to commit in the 'security' branch."
+            git branch -a
           fi
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
