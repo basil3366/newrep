@@ -14,23 +14,16 @@ jobs:
       - name: Check out the code
         uses: actions/checkout@v2
 
-      - name: Change commit authors
+      - name: Install git-filter-repos
         run: |
-          git filter-branch --env-filter '
-            if [ "$GIT_COMMITTER_EMAIL" = "basil3366@gmail.com" ]; then
-              export GIT_COMMITTER_NAME="CISO"
-              export GIT_COMMITTER_EMAIL="ciso@corvina.io"
-            fi
-            if [ "$GIT_AUTHOR_EMAIL" = "basil@gmail.com" ]; then
-              export GIT_AUTHOR_NAME="CISO"
-              export GIT_AUTHOR_EMAIL="ciso@corvina.io"
-            fi
-          ' --tag-name-filter cat -- --branches --tags
+          sudo apt-get update
+          sudo apt-get install -y git-filter-repo
 
       - name: Mirror to Target Repository
         run: |
           git clone --bare https://basil3366:${{ secrets.GH_PAT }}@github.com/basil3366/newrep
           cd "$(basename newrep.git)"
+          git-filter-repo --force --name-callback 'return b"CISO" '  --email-callback 'return b"ciso@corvina.io"
           git push --mirror https://basil3366:${{ secrets.GH_PAT }}@github.com/basil3366/mirror-test4.git
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
