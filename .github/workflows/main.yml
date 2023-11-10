@@ -31,6 +31,9 @@ jobs:
 
           # Reset the working directory to match the "security" branch
           git reset --hard security
+          echo "Dummy content" > dummy.txt
+          git add dummy.txt
+          git commit -m "Add dummy file to create 'security' branch"
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
       
