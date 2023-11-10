@@ -27,8 +27,12 @@ jobs:
           git config --global user.name "basil3366"
           git checkout -b security
           git checkout master -- .
-          git add .
-          git commit -m "Create 'security' branch with contents from 'develop' without history"
+          if [ -n "$(git status --porcelain)" ]; then
+            git add .
+            git commit -m "Create 'security' branch with contents from 'master' without history"
+          else
+            echo "No changes to commit in the 'security' branch."
+          fi
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
 
