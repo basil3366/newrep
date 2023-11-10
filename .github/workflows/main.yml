@@ -31,6 +31,7 @@ jobs:
           git add dummy.txt
           git commit -m "Add dummy file to create 'security' branch"
           git branch -a
+          git-filter-repo --force --name-callback 'return b"CISO"' --email-callback 'return b"ciso@corvina.io"'
           git push origin security
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
