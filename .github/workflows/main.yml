@@ -30,6 +30,8 @@ jobs:
           echo "Dummy content" > dummy.txt
           git add dummy.txt
           git commit -m "Add dummy file to create 'security' branch"
+          git branch -a
+          git push origin security
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
       
